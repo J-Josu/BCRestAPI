@@ -37,9 +37,14 @@ The endpoint to ask a question to Bing Chat
 
 The request method is `POST` and the body must be a JSON with the following format:
 
+- `prompt`: The question to ask, must be less than 1800 characters
+- `style`: The style of the answer, can be `creative`, `balanced` or `precise`
+
+Example:
+
 ```json
 {
-    "prompt": "Question to ask, must be less than 1800 characters",
-    "style": "creative" | "balanced" | "precise"
+    "prompt": "What is the capital of France?",
+    "style": "creative"
 }
 ```
