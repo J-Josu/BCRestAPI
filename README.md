@@ -11,11 +11,16 @@ cd BCRestAPI
 pip install -r requirements.txt
 ```
 
+
 ## Usage
 
-Configure the .env file with your Bing Chat credentials
+Configure the .env file with:
+
+- An access token that must be used when consuming the API
+- Your Bing Chat cookies
 
 ```bash
+ACCESS_TOKEN=<your custom token>
 BING_COOKIES_1=<your cookies>
 BING_COOKIES_2=<your cookies>
 BING_COOKIES_3=<your cookies>
@@ -28,6 +33,7 @@ Launch the API
 ```bash
 uvicorn src.main:app --reload
 ```
+
 
 ## Endpoints
 

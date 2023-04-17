@@ -60,9 +60,13 @@ lock2 = asyncio.Lock()
 
 @app.middleware("http")
 async def limit_simultaneous_requests(request: Request, call_next: Callable[[Request], Coroutine[Any, Any, Response]]):
+    if request.headers.get('Access-Token') != os.getenv('ACCESS_TOKEN'):
+        return Response("Invalid access token", status_code=status.HTTP_401_UNAUTHORIZED)
+
     global current_requests
     if current_requests >= MAX_SIMULTANEOUS_REQUESTS:
         return Response("Too many requests", status_code=429)
+
     current_requests += 1
     response = await call_next(request)
     current_requests -= 1
@@ -85,7 +89,6 @@ async def ask_id(question: Question, id: int):
     else:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail='Invalid bot id')
-    print(f'Bot {id} is being used')
 
     async with lock:
         response = await bot.ask(prompt=question.prompt, conversation_style=ConversationStyle[question.style])
