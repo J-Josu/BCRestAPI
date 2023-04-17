@@ -1,4 +1,5 @@
 {
     "python.analysis.autoImportCompletions": true,
     "files.autoSaveDelay": 60000,
+    "files.trimFinalNewlines": true
 }

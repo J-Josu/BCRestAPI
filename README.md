@@ -1,6 +1,6 @@
 # BCRestAPI
 
-This is a simple REST API in [FastAPI]() for consuming Bing Chat with [EdgeGPT](https://github.com/acheong08/EdgeGPT)
+This is a simple REST API in [FastAPI](https://fastapi.tiangolo.com/) for consuming Bing Chat with [EdgeGPT](https://github.com/acheong08/EdgeGPT) python library.
 
 
 ## Installation
@@ -43,4 +43,3 @@ The request method is `POST` and the body must be a JSON with the following form
     "style": "creative" | "balanced" | "precise"
 }
 ```
-
