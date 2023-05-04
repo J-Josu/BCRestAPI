@@ -1,6 +1,7 @@
 import asyncio
 import os
 import json
+import secrets
 from typing import Any, Callable, Coroutine, Literal, cast as cast_type
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
@@ -41,7 +42,10 @@ async def lifespan(app: FastAPI):
 
 
 async def auth_dependancy(request: Request):
-    if request.headers.get('Access-Token') != os.getenv('ACCESS_TOKEN'):
+    if not secrets.compare_digest(
+        request.headers.get('Access-Token') or '',
+        os.getenv('ACCESS_TOKEN') or ''
+    ):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid token')
 
@@ -60,7 +64,10 @@ lock2 = asyncio.Lock()
 
 @app.middleware("http")
 async def limit_simultaneous_requests(request: Request, call_next: Callable[[Request], Coroutine[Any, Any, Response]]):
-    if request.headers.get('Access-Token') != os.getenv('ACCESS_TOKEN'):
+    if not secrets.compare_digest(
+        request.headers.get('Access-Token') or '',
+        os.getenv('ACCESS_TOKEN') or ''
+    ):
         return Response("Invalid access token", status_code=status.HTTP_401_UNAUTHORIZED)
 
     global current_requests
