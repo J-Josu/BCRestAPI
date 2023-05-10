@@ -1,5 +1,13 @@
 {
-    "python.analysis.autoImportCompletions": true,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
     "files.autoSaveDelay": 60000,
-    "files.trimFinalNewlines": true
+    "files.trimFinalNewlines": true,
+    "python.analysis.autoImportCompletions": true,
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[markdown]": {
+        "editor.tabSize": 2
+    }
 }
